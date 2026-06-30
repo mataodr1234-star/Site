@@ -1,0 +1,218 @@
+Index.html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite ❤️</title>
+
+<style>
+*{
+        margin:0;
+            padding:0;
+                box-sizing:border-box;
+                    font-family:Arial,sans-serif;
+}
+
+body{
+        background:#c82323;
+            height:100vh;
+                display:flex;
+                    justify-content:center;
+                        align-items:center;
+                            overflow:hidden;
+}
+
+.card{
+        background:#7d1515;
+            padding:30px;
+                border-radius:20px;
+                    width:340px;
+                        text-align:center;
+                            color:white;
+                                position:relative;
+}
+
+h2{
+        margin-bottom:20px;
+}
+
+button{
+        border:none;
+            padding:15px 25px;
+                margin:10px;
+                    border-radius:15px;
+                        font-size:18px;
+                            cursor:pointer;
+                                transition:.2s;
+}
+
+#sim{
+        background:#ff6b3d;
+            color:white;
+}
+
+#nao{
+        background:#444;
+            color:white;
+                position:absolute;
+                    right:20px;
+                        bottom:20px;
+}
+
+.opcao{
+        display:block;
+            width:100%;
+                margin:10px 0;
+                    background:#ff6b3d;
+                        color:white;
+}
+
+input[type=date]{
+        width:100%;
+            padding:12px;
+                margin-top:20px;
+                    border-radius:10px;
+                        border:none;
+                            font-size:18px;
+}
+
+#proximo{
+        margin-top:20px;
+            width:100%;
+                background:#ff6b3d;
+                    color:white;
+}
+
+.heart{
+        position:absolute;
+            color:#222;
+                animation:subir 8s linear infinite;
+                    font-size:22px;
+}
+
+@keyframes subir{
+        0%{
+                    transform:translateY(100vh);
+                            opacity:0;
+        }
+            20%{
+                        opacity:1;
+            }
+                100%{
+                            transform:translateY(-120vh);
+                                    opacity:0;
+                }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="conteudo">
+
+<h2>🥺<br><br>Você aceitaria sair comigo?</h2>
+
+<button id="sim">SIM ❤️</button>
+
+<button id="nao">NÃO</button>
+
+</div>
+
+<script>
+
+// Corações
+for(let i=0;i<35;i++){
+        let h=document.createElement("div");
+            h.className="heart";
+                h.innerHTML="🖤";
+                    h.style.left=Math.random()*100+"vw";
+                        h.style.animationDuration=(5+Math.random()*5)+"s";
+                            h.style.fontSize=(15+Math.random()*25)+"px";
+                                document.body.appendChild(h);
+}
+
+// Botão NÃO fugindo
+const nao=document.getElementById("nao");
+
+nao.addEventListener("mouseover",()=>{
+
+        const card=document.querySelector(".card");
+
+            const maxX=card.clientWidth-nao.offsetWidth-20;
+                const maxY=card.clientHeight-nao.offsetHeight-20;
+
+                    nao.style.left=Math.random()*maxX+"px";
+                        nao.style.top=Math.random()*maxY+"px";
+
+});
+
+// Botão SIM
+document.getElementById("sim").onclick=()=>{
+
+    document.getElementById("conteudo").innerHTML=`
+
+    <h2>😏🌹<br><br>Você disse SIM? ❤️</h2>
+
+    <p>Agora escolhe o rolê 😌</p>
+
+    <button class="opcao" onclick="escolher('☕ Café')">☕ Tomar um café</button>
+
+    <button class="opcao" onclick="escolher('🍕 Comer alguma coisa')">🍕 Comer alguma coisa</button>
+
+    <button class="opcao" onclick="escolher('🎬 Cinema')">🎬 Cinema</button>
+
+    <button class="opcao" onclick="escolher('🚶 Dar uma volta')">🚶 Dar uma volta</button>
+
+    `;
+
+}
+
+// Escolha
+function escolher(local){
+
+    document.getElementById("conteudo").innerHTML=`
+
+    <h2>📅 Agora escolhe uma data</h2>
+
+    <p>${local}</p>
+
+    <input type="date" id="data">
+
+    <button id="proximo">Finalizar ❤️</button>
+
+    `;
+
+    document.getElementById("proximo").onclick=()=>{
+
+        let data=document.getElementById("data").value;
+
+        if(data==""){
+                alert("Escolhe uma data 😅");
+                    return;
+        }
+
+        document.getElementById("conteudo").innerHTML=`
+
+        <h2>❤️ Perfeito!</h2>
+
+        <p>Você escolheu:</p>
+
+        <h3>${local}</h3>
+
+        <h3>${data}</h3>
+
+        <br>
+
+        <p>Agora é só me mandar um print dessa tela 😊</p>
+
+        `;
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
